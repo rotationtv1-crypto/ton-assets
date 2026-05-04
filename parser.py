@@ -25,8 +25,8 @@ BLACKLIST_JETTONS_TYPES = ["jetton_master", "jetton_wallet", "jetton_wallet_gove
 def clone_ton_labels_repo():
     os.system("git clone https://github.com/ton-studio/ton-labels.git")
 
-def rm_ton_labels_dir():
-    shutil.rmtree(TON_LABELS_DIR)
+def rm_ton_labels_dir(base_dir: str):
+    shutil.rmtree(os.path.join(base_dir, TON_LABELS_DIR))
 
 def get_types_from_tonapi(address: str) -> list[str]:
     url = TON_API_ACCOUNT_URL + address
@@ -115,13 +115,14 @@ def get_assets_from_dirs(skip_addr_set: set[str]) -> dict[str, list[AssetData]]:
     return all_assets
 
 def main():
+    to_review_dir = os.path.abspath(TO_REVIEW_DIR)
     try:
-        os.chdir(TO_REVIEW_DIR)
+        os.chdir(to_review_dir)
         clone_ton_labels_repo()
 
         os.chdir(RETURN_DIR)
         known_addresses = get_known_assets_addresses()
-        os.chdir(TO_REVIEW_DIR)
+        os.chdir(to_review_dir)
 
         blacklist_addresses = get_blacklist_addresses()
         skip_addresses = get_skip_addresses()
@@ -133,7 +134,7 @@ def main():
         generate_to_review_html(assets["whitelist"])
         add_blacklist(assets["blacklist"])
     finally:
-        rm_ton_labels_dir()
+        rm_ton_labels_dir(to_review_dir)
 
 if __name__ == "__main__":
     main()
