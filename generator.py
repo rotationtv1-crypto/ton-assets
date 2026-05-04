@@ -160,7 +160,8 @@ def main():
     accounts_md = "\n".join(["[%s](%s%s) | %s" % (j[0], EXPLORER_ACCOUNTS, normalize_address(j[1], True), normalize_address(j[1], False)) for j in accounts])
     collections_md = "\n".join(["[%s](%s%s) | %s" % (j[0], EXPLORER_COLLECTIONS,  normalize_address(j[1], True), normalize_address(j[1], False)) for j in collections])
 
-    open('README.md', 'w').write(open("readme.md.template").read() % (accounts_md, collections_md))
+    with open("readme.md.template") as tmpl, open('README.md', 'w') as out:
+        out.write(tmpl.read() % (accounts_md, collections_md))
 
 if __name__ == '__main__':
     main()

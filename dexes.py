@@ -81,7 +81,7 @@ def __get_backed_assets() -> List[Asset]:
     url = "https://api.backed.fi/api/v1/token"
     response = requests.get(url)
     if response.status_code != 200:
-        logging.error("failed to get dedust assets")
+        logging.error("failed to get backed assets")
         return list()
     data = response.json()
     assets = list()

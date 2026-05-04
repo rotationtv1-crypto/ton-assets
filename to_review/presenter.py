@@ -8,7 +8,7 @@ ROW_TEMPLATE = """
         <td class="address"><a href="{link}" class="address{i}">{address}</a></td>
         <td class="category"><input type="text" class="category{i}" name="category{i}" placeholder="Enter category" value="{category}"></td>
         <td class="name"><input type="text" class="name{i}" name="name{i}" placeholder="Enter name" value="{name}"></td>
-        <td class="website"><a href="website" class="website{i}">{website}</a></td>
+        <td class="website"><a href="{website}" class="website{i}">{website}</a></td>
         <td class="description"><input type="text" class="description{i}" name="description{i}" placeholder="Enter description" value="{description}"></td>
         <td class="accept"><input type="checkbox" class="accept{i}" name="{i}"></td>
       </tr>
